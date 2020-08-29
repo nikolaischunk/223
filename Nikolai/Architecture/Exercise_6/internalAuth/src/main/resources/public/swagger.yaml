@@ -1,0 +1,224 @@
+swagger: '2.0'
+info:
+  description: 'Documentation for an API'
+  version: '1.0'
+  title: 'API documentation'
+  contact:
+    name: 'Jens Harutaka Scheidmann'
+    email: 'jens.scheidmann@gmail.com'
+host: 'localhost:8080'
+basePath: /
+tags:
+  - name: 'UserController'
+    description: 'Endpoints for CRUD-operations with the entity "User"'
+
+
+paths:
+
+  # USER
+  /users:
+    get:
+      tags:
+        - UserController
+      summary: 'Returns all users'
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        403:
+          description: Forbidden
+      deprecated: false
+    post:
+      tags:
+        - UserController
+      summary: 'Creates a new user'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user_full
+          required: true
+          description: "The new users data"
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: Bad Request
+        403:
+          description: Forbidden
+      deprecated: false
+  /users/:
+    get:
+      tags:
+        - UserController
+      summary: 'Returns all users'
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        403:
+          description: Forbidden
+      deprecated: false
+    post:
+      tags:
+        - UserController
+      summary: 'Creates a new user'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user_full
+          required: true
+          description: "The new users data"
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: Bad Request
+        403:
+          description: Forbidden
+      deprecated: false
+  /users/{id}:
+    get:
+      tags:
+        - UserController
+      summary: 'Returns a single user with the provided ID'
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: 'ID of the requested entity'
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - UserController
+      summary: 'Updates the user with the provided ID'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: 'ID of the requested entity'
+          required: true
+          type: string
+        - in: body
+          name: user_full
+          description: "The updated users data"
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: Bad Request
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - UserController
+      summary: 'Deletes a user with the provided ID'
+      produces:
+        - none
+      parameters:
+        - name: id
+          in: path
+          description: 'ID of the requested entity'
+          required: true
+          type: string
+      responses:
+        204:
+          description: No Content
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+      deprecated: false
+  /users/{id}/full:
+    get:
+      tags:
+        - UserController
+      summary: 'Returns a single full user with the provided ID'
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: 'ID of the requested entity'
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+      deprecated: false
+
+definitions:
+
+  # USER
+  User:
+    type: object
+    required:
+      - email
+      - firstName
+      - lastName
+    properties:
+      id:
+        type: string
+        example: 'id'
+      firstName:
+        type: string
+        example: 'Yoshimura'
+      lastName:
+        type: string
+        example: 'Yamada'
+      email:
+        type: string
+        example: 'example@mail.com'
+    title: User
